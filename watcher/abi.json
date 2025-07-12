@@ -1,0 +1,45 @@
+[
+    {
+        "type": "function",
+        "name": "transfer",
+        "inputs": [
+            {
+                "name": "receiver",
+                "type": "string",
+                "internalType": "string"
+            },
+            {
+                "name": "cid",
+                "type": "string",
+                "internalType": "string"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "event",
+        "name": "TransferTo",
+        "inputs": [
+            {
+                "name": "sender",
+                "type": "address",
+                "indexed": true,
+                "internalType": "address"
+            },
+            {
+                "name": "receiver",
+                "type": "bytes32",
+                "indexed": true,
+                "internalType": "bytes32"
+            },
+            {
+                "name": "cid",
+                "type": "bytes32",
+                "indexed": true,
+                "internalType": "bytes32"
+            }
+        ],
+        "anonymous": false
+    }
+]

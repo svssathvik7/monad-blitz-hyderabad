@@ -4,3 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+alloy = { version = "1.0.20", features = ["full"] }
+clear = "0.1.0"
+sqlx = { version = "0.8.2", features = ["rust_decimal", "chrono", "postgres", "runtime-tokio", "tls-native-tls","uuid"] }
