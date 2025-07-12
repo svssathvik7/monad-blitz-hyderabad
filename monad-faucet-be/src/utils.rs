@@ -14,10 +14,6 @@ pub async fn magnify_faucet_drip(
 ) -> u8 {
     let is_github_authenticated = user.is_github_authenticated;
 
-    let is_garden_user = match response.status {
-        Status::Ok => response.result > 0,
-        Status::Error => false,
-    };
 
     match (is_github_authenticated) {
         (true) => faucet::MAGNIFICATION_GITHUB_AUTH, 

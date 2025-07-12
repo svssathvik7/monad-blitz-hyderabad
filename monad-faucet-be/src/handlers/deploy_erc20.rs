@@ -38,12 +38,12 @@ pub async fn deploy_erc20(
     State(state): State<AppState>,
     mut multipart: Multipart,
 ) -> Result<Json<Response<DeployErc20Response>>, (StatusCode, Json<Response<ErrorResponse>>)> {
-    if !auth_user.is_github_authenticated {
-        return Err((
-            StatusCode::UNAUTHORIZED,
-            res_err("Please authenticate with Github to deploy your tokens"),
-        ));
-    }
+    // if !auth_user.is_github_authenticated {
+    //     return Err((
+    //         StatusCode::UNAUTHORIZED,
+    //         res_err("Please authenticate with Github to deploy your tokens"),
+    //     ));
+    // }
     let mut token_data: Option<TokenDeployRequestData> = None;
     let mut file_data: Option<Bytes> = None;
     let mut unique_file_name: Option<String> = None;

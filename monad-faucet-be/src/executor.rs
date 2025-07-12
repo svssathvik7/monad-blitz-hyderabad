@@ -126,48 +126,48 @@ impl Executor {
         request: &TokenTransferRequest,
     ) -> Result<(), ExecutorResponse> {
         // Check if IP has claimed within 24 hours
-        let next_access_by_ip = self
-            .store
-            .get_next_access(
-                crate::store::FieldType::ip,
-                &request.ip.clone().to_string(),
-                &request.token_address.clone(),
-            )
-            .await;
-        if next_access_by_ip > Utc::now() {
-            return Err(ExecutorResponse {
-                status: ResponseStatus::Error,
-                error: Some(ErrorResponse {
-                    message: format!(
-                        "You have already claimed this in the last 24hrs. You can claim again after"
-                    ),
-                    next_access: Some(next_access_by_ip),
-                }),
-                data: None,
-            });
-        }
+        // let next_access_by_ip = self
+        //     .store
+        //     .get_next_access(
+        //         crate::store::FieldType::ip,
+        //         &request.ip.clone().to_string(),
+        //         &request.token_address.clone(),
+        //     )
+        //     .await;
+        // if next_access_by_ip > Utc::now() {
+        //     return Err(ExecutorResponse {
+        //         status: ResponseStatus::Error,
+        //         error: Some(ErrorResponse {
+        //             message: format!(
+        //                 "You have already claimed this in the last 24hrs. You can claim again after"
+        //             ),
+        //             next_access: Some(next_access_by_ip),
+        //         }),
+        //         data: None,
+        //     });
+        // }
 
         // Check if wallet has claimed within 24 hours
-        let next_access_by_wallet = self
-            .store
-            .get_next_access(
-                FieldType::to_address,
-                &request.to.clone().to_string(),
-                &request.token_address.clone(),
-            )
-            .await;
-        if next_access_by_wallet > Utc::now() {
-            return Err(ExecutorResponse {
-                status: ResponseStatus::Error,
-                error: Some(ErrorResponse {
-                    message: format!(
-                        "You have already claimed this in the last 24hrs. You can claim again after"
-                    ),
-                    next_access: Some(next_access_by_wallet),
-                }),
-                data: None,
-            });
-        }
+        // let next_access_by_wallet = self
+        //     .store
+        //     .get_next_access(
+        //         FieldType::to_address,
+        //         &request.to.clone().to_string(),
+        //         &request.token_address.clone(),
+        //     )
+        //     .await;
+        // if next_access_by_wallet > Utc::now() {
+        //     return Err(ExecutorResponse {
+        //         status: ResponseStatus::Error,
+        //         error: Some(ErrorResponse {
+        //             message: format!(
+        //                 "You have already claimed this in the last 24hrs. You can claim again after"
+        //             ),
+        //             next_access: Some(next_access_by_wallet),
+        //         }),
+        //         data: None,
+        //     });
+        // }
 
         Ok(())
     }
