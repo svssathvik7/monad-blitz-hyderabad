@@ -1,5 +1,4 @@
 import { CisternToken } from "./CisternToken";
-import { JuicyTokens } from "./JuicyTokens";
 import { TokenFiller } from "./TokenFiller";
 
 export const Faucet = () => {
@@ -7,7 +6,6 @@ export const Faucet = () => {
     <div className="flex w-full max-w-[672px] flex-col gap-10 px-4 py-12">
       <TokenFiller />
       <CisternToken />
-      <JuicyTokens />
     </div>
   );
 };

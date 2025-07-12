@@ -42,7 +42,7 @@ export const InputBox: FC<InputBoxProps> = ({
   return (
     <div
       className={cn(
-        "hover:border-yellow-500 flex h-full items-center rounded-lg border border-yellow bg-white/10 px-3 py-2 shadow-sm transition-all duration-150",
+        "border-yellow flex h-full items-center rounded-lg border bg-white/10 px-3 py-2 shadow-sm transition-all duration-150 hover:border-yellow-500",
         className
       )}
       style={width ? { width } : undefined}
@@ -50,7 +50,7 @@ export const InputBox: FC<InputBoxProps> = ({
       {type === inputTypes.file ? (
         !imageURL ? (
           <label className="flex w-full cursor-pointer items-center gap-2">
-            <span className="text-sm font-semibold text-yellow">
+            <span className="text-yellow text-sm font-semibold">
               Choose file
             </span>
             <input
@@ -67,9 +67,9 @@ export const InputBox: FC<InputBoxProps> = ({
             <img
               src={imageURL}
               alt="Uploaded Preview"
-              className="h-8 w-8 rounded-full border border-yellow object-cover"
+              className="border-yellow h-8 w-8 rounded-full border object-cover"
             />
-            <span className="text-sm font-semibold text-yellow">
+            <span className="text-yellow text-sm font-semibold">
               {defaultValue && defaultValue.length <= 12
                 ? defaultValue
                 : `${defaultValue?.slice(0, 12)}...`}
@@ -85,11 +85,9 @@ export const InputBox: FC<InputBoxProps> = ({
             <button
               type="button"
               onClick={handleEditClick}
-              className="ml-2 rounded-full p-1 transition hover:bg-yellow/20 focus:outline-none"
+              className="hover:bg-yellow/20 ml-2 rounded-full p-1 transition focus:outline-none"
               aria-label="Edit"
-            >
-              <img src="/EditIcon.svg" alt="Edit" className="h-5 w-5" />
-            </button>
+            ></button>
           </div>
         )
       ) : (
@@ -98,7 +96,7 @@ export const InputBox: FC<InputBoxProps> = ({
             type={type}
             value={defaultValue}
             onChange={onChange}
-            className="w-full border-none bg-transparent font-heldane text-sm font-semibold text-yellow outline-none placeholder:text-yellow/60 focus:outline-none focus:ring-0"
+            className="font-heldane text-yellow placeholder:text-yellow/60 w-full border-none bg-transparent text-sm font-semibold outline-none focus:outline-none focus:ring-0"
             {...props}
           />
         </label>
@@ -107,7 +105,7 @@ export const InputBox: FC<InputBoxProps> = ({
         <button
           type="button"
           onClick={handleEditClick}
-          className="ml-2 rounded-full p-1 transition hover:bg-yellow/20 focus:outline-none"
+          className="hover:bg-yellow/20 ml-2 rounded-full p-1 transition focus:outline-none"
           aria-label="Edit"
         >
           <img src="/EditIcon.svg" alt="Edit" className="h-5 w-5" />
