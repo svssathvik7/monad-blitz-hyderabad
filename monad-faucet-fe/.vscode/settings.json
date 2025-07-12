@@ -1,0 +1,27 @@
+{
+  "cSpell.words": [
+    "bignumber",
+    "citrea",
+    "gardenfi",
+    "Parens",
+    "Siwe",
+    "tailwindcss",
+    "tanstack",
+    "tseslint",
+    "viem",
+    "Waitlist",
+    "heldane"
+  ],
+  "prettier.semi": true,
+  "prettier.singleQuote": false,
+  "prettier.trailingComma": "es5",
+  "prettier.tabWidth": 2,
+  "prettier.bracketSpacing": true,
+  "prettier.bracketSameLine": false,
+  "prettier.arrowParens": "always",
+  "prettier.endOfLine": "lf",
+  "editor.formatOnSave": true, // Automatically format on save
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
