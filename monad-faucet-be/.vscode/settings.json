@@ -1,0 +1,11 @@
+{
+  "cSpell.words": [
+    "checksummed",
+    "chrono",
+    "dotenv",
+    "jsonwebtoken",
+    "MULTICALL",
+    "oneshot"
+  ],
+  "postman.settings.dotenv-detection-notification-visibility": false
+}
