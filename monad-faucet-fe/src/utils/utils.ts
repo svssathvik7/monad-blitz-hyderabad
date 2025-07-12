@@ -1,6 +1,5 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { codeState, updateUser, User } from "../store/store";
 import { API } from "../constants/api";
 import {
   DeployResponse,
@@ -17,35 +16,6 @@ const getIpAddress = async () => {
   return data.ip;
 };
 
-async function verifyCaptcha(captchaToken: string) {
-  const response = await fetch(API().captcha, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ip_address: await getIpAddress(),
-      token: captchaToken,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const data: { data: { success: boolean } } = await response.json();
-
-  return data.data.success;
-}
-
-function handleLogin() {
-  localStorage.removeItem("userToken");
-  const client_id = API().client_Id;
-  const url = "https://github.com/login/oauth/authorize";
-  const params = `client_id=${client_id}`;
-  window.location.assign(`${url}?${params}`);
-}
-
 function getCode() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -53,70 +23,11 @@ function getCode() {
   return codeParam;
 }
 
-async function tokenToUser(token: string): Promise<User | undefined> {
-  try {
-    const userResponse = await fetch(API().user, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!userResponse.ok) {
-      throw new Error("Failed to fetch user data");
-    }
-
-    const data: { data: User } = await userResponse.json();
-
-    updateUser(data.data);
-    return data.data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    localStorage.clear();
-    updateUser(null);
-  }
-}
-
 const delay = async (time_in_ms: number) => {
   return new Promise((res) => {
     setTimeout(res, time_in_ms);
   });
 };
-
-function clearQueryParams() {
-  const { pathname } = window.location;
-  window.history.replaceState({}, "", pathname);
-}
-
-async function fetchUser({ code, setCode }: codeState) {
-  const userToken = localStorage.getItem("userToken");
-
-  if (userToken) {
-    return await tokenToUser(userToken);
-  }
-
-  if (!code) return null;
-
-  const tokenResponse = await fetch(API().auth(code));
-
-  if (!tokenResponse.ok) {
-    throw new Error(`Failed to fetch token: ${tokenResponse.statusText}`);
-  }
-
-  const { data } = await tokenResponse.json();
-
-  if (!data || !data.token) {
-    throw new Error("Token not found in response data");
-  }
-
-  const token = data.token;
-
-  localStorage.setItem("userToken", token);
-
-  clearQueryParams();
-  setCode(null);
-
-  return await tokenToUser(token);
-}
 
 async function handleQuenchTokens(
   address: string,
@@ -250,24 +161,12 @@ function convertToLocalTime(dateString: string): string {
   });
 }
 
-export const linkDiscord = () =>
-  window.open("https://discord.gg/dZwSjh9922", "_blank", "noopener,noreferrer");
-
-export const linkGardenInvite = () =>
-  window.open("https://discord.gg/dZwSjh9922", "_blank", "noopener,noreferrer");
-
-export const linkGarden = () =>
-  window.open("https://app.garden.finance/", "_blank", "noopener,noreferrer");
-
 export const isValidEVMAddress = (address: string) =>
   /^0x[a-fA-F0-9]{40}$/.test(address);
 
 export {
-  verifyCaptcha,
-  handleLogin,
   handleQuenchTokens,
   getCode,
-  fetchUser,
   deployToken,
   convertToLocalTime,
 };

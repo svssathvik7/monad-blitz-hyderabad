@@ -13,9 +13,7 @@ export const TokenRefreshment: FC<TokenRefreshmentProps> = ({
 }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Modal.Children opacityLevel={"extra-light"}>
         <TokenRefreshmentComponent onClose={onClose} />
-      </Modal.Children>
     </Modal>
   );
 };

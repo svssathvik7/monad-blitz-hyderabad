@@ -1,7 +1,4 @@
-import { useFetchUser } from "../../hooks/fetchUser";
 export const Navbar = () => {
-  useFetchUser();
-
   return (
     <div className="z-0 flex w-screen items-center justify-between bg-purple-950 px-4 py-4">
       <div className="flex items-center justify-start gap-3">
